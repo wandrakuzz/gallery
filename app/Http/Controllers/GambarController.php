@@ -24,7 +24,8 @@ class GambarController extends Controller
     public function komen($id)
     {
       $komens = Gambar::find($id);
-      return view('comment.create',compact('komens'));
+      $lists = Comment::all();
+      return view('comment.create',compact('komens','lists'));
 
 
     }
@@ -73,6 +74,7 @@ class GambarController extends Controller
     public function show(Gambar $gambar)
     {
         //
+        return $gambar;
     }
 
     /**

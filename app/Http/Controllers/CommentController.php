@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -15,6 +16,10 @@ class CommentController extends Controller
     public function index()
     {
         //
+        $komens = Comment::all();
+
+        return view ('comment.create',compact('komens'));
+
     }
 
     /**
@@ -25,8 +30,7 @@ class CommentController extends Controller
     public function create($id)
     {
 
-        $images = Gambar::findOrFail($id);
-        return view ('comment.create',compact('images'));
+
     }
 
     /**

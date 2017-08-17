@@ -12,14 +12,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
   </head>
   <body>
-    <h1>Add Comment</h1>
+    <br><br><br>
 <div class="container">
   <div class="row">
     <div class="col-md-4">
           <a href="/images/{{ $komens->image }}"><img class="img-responsive" alt="" src="/images/{{ $komens->image }}" style="width:300px;height:300px;"/></a>
-          <div class="col-md-8" align="center">
-              <h3 class='text-muted'>{{ $komens->title }}</h3>
-          </div> <!-- text-center / end -->
     </div>
     <div class="col-md-8">
       <form class="form-group" action="{{ url('/create/komen/store',$komens)}}" method="POST">
@@ -27,13 +24,35 @@
       <h3>Comment Box:</h3>
       <br>
       <textarea class="form-control" type="text" name="comment" rows="5" cols="60"></textarea>
-      
+
       <br>
       <button class="btn btn-primary" type="submit" value="Submit">Submit</button
 
   </form>
     </div>
   </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="offset-md-2 col-md-10" >
+      <table class="table table-responsive" align="center">
+        <thead>
+          <th>Comment</th>
+          <th>Time</th>
+        </thead>
+        <tbody>
+          @foreach($lists as $komen)
+          <tr>
+            <td>{{ $komen->comment}}</td>
+            <td>{{ $komen->created_at->diffForHumans() }}</td>
+          </tr>
+          @endforeach
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
 </div>
 
   </body>
