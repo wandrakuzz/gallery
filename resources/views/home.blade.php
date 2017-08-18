@@ -1,37 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Image Gallery Example</title>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <!-- References: https://github.com/fancyapps/fancyBox -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-    <script src="https://rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script>
-    <link rel="stylesheet" href="https://rawgit.com/enyo/dropzone/master/dist/dropzone.css">
+@extends('layouts.app')
 
-    <style type="text/css">
-    .gallery
-    {
-        display: inline-block;
-        margin-top: 20px;
-    }
-    .close-icon{
-    	border-radius: 50%;
-        position: absolute;
-        right: 5px;
-        top: -10px;
-        padding: 5px 8px;
-    }
-    .form-image-upload{
-        background: #e8e8e8 none repeat scroll 0 0;
-        padding: 15px;
-    }
-    </style>
-</head>
-<body>
-
+@section('content')
 <div class="container">
 
     <h3>Laravel - Image Gallery CRUD Example</h3>
@@ -74,12 +43,12 @@
     </form>
     <br>
     <br>
+
     <div class="row">
     <div class='list-group gallery'>
-
             @if($images->count())
                 @foreach($images as $image)
-                <div class='col-sm-4 col-xs-6 col-md-3 col-lg-3'>
+                <div class='col-sm-4 col-xs-6 col-md-3 col-lg-3' style="width:300px;height:300px; margin-bottom:100px;">
                     <a class="thumbnail fancybox" rel="ligthbox" href="/images/{{ $image->image }}">
                         <img class="img-responsive" alt="" src="/images/{{ $image->image }}" style="width:300px;height:300px;" />
                         <div class='text-center'>
@@ -95,7 +64,6 @@
                     </form>
                     <div class="" align="center">
                       <a href="{{ url('/create/komen',$image->id)}}" class="btn btn-warning btn-sm">Add Comment</a>&nbsp&nbsp
-                      <a href="#" class="btn btn-warning btn-sm">View Comment</a>
                     </div>
                 </div> <!-- col-6 / end -->
                 @endforeach
@@ -104,16 +72,4 @@
         </div> <!-- list-group / end -->
     </div> <!-- row / end -->
 </div> <!-- container / end -->
-
-</body>
-
-
-<script type="text/javascript">
-    $(document).ready(function(){
-        $(".fancybox").fancybox({
-            openEffect: "elastic",
-            closeEffect: "elastic"
-        });
-    });
-</script>
-</html>
+@endsection

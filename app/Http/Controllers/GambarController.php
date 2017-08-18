@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Gambar;
 use App\Comment;
+use App\User;
 use Illuminate\Http\Request;
 
 class GambarController extends Controller
@@ -18,14 +19,15 @@ class GambarController extends Controller
         //
         $images = Gambar::all();
 
-        return view ('gambar.upload',compact('images'));
+        return view ('home',compact('images'));
     }
 
     public function komen($id)
     {
       $komens = Gambar::find($id);
-      $lists = Comment::all();
-      return view('comment.create',compact('komens','lists'));
+      $lists = Comment::allComment($id)->get();
+
+      return view('comment.create',compact('komens','lists','users'));
 
 
     }
@@ -50,11 +52,14 @@ class GambarController extends Controller
      */
     public function store(Request $request,Gambar $gambar)
     {
-
+        $user = auth()->user()->id;
         Comment::create([
           'image_id' => $gambar->id,
+          'user_id'  => $user,
           'comment'  => $request->comment,
         ]);
+
+        return back();
 
         // // $gambars = new Gambar;
         // $komens = new Comment;

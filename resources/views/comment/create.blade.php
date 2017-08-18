@@ -1,17 +1,8 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Add Comment</title>
+@extends('layouts.app')
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <!-- References: https://github.com/fancyapps/fancyBox -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-  </head>
+@section('content')
   <body>
+    <a href="/home" class="btn btn-danger">HOME</a>
     <br><br><br>
 <div class="container">
   <div class="row">
@@ -37,12 +28,14 @@
     <div class="offset-md-2 col-md-10" >
       <table class="table table-responsive" align="center">
         <thead>
+          <th>Name</th>
           <th>Comment</th>
           <th>Time</th>
         </thead>
         <tbody>
           @foreach($lists as $komen)
           <tr>
+            <td>{{ $komen->user->name}}</td>
             <td>{{ $komen->comment}}</td>
             <td>{{ $komen->created_at->diffForHumans() }}</td>
           </tr>
@@ -56,4 +49,6 @@
 </div>
 
   </body>
+
 </html>
+  @endsection

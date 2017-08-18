@@ -15,10 +15,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/upload','GambarController@index');
-Route::post('/upload', 'GambarController@upload');
-Route::delete('/delete/{id}', 'GambarController@destroy');
 
 
-Route::get('/create/komen/{id}','GambarController@komen');
-Route::post('/create/komen/store/{gambar}','GambarController@store');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => ['auth']],function(){
+
+  // Route::get('/upload','GambarController@index');
+  Route::post('/upload', 'GambarController@upload');
+  Route::delete('/delete/{id}', 'GambarController@destroy');
+
+
+  Route::get('/create/komen/{id}','GambarController@komen');
+  Route::post('/create/komen/store/{gambar}','GambarController@store');
+
+});
